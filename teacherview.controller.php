@@ -103,7 +103,7 @@ function scheduler_action_doaddsession($scheduler, $formdata, moodle_url $return
                                      && $conflict->numstudents == 0; // Do not delete slots with bookings.
                 }
 
-                if ($conflicts) {
+                if ($conflicts && !$data->ignoreconflicts) {
                     $conflictmsg = '';
                     $cl = new scheduler_conflict_list();
                     $cl->add_conflicts($conflicts);
@@ -123,7 +123,7 @@ function scheduler_action_doaddsession($scheduler, $formdata, moodle_url $return
                     }
                     \core\notification::warning($conflictmsg);
                 }
-                if (!$conflicts || $resolvable) {
+                if (!$conflicts || $resolvable || $data->ignoreconflicts) {
                     $slotid = $DB->insert_record('scheduler_slots', $slot, true, true);
                     $slotobj = $scheduler->get_slot($slotid);
                     \mod_scheduler\event\slot_added::create_from_slot($slotobj)->trigger();
