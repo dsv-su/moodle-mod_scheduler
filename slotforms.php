@@ -93,7 +93,7 @@ abstract class scheduler_slotform_base extends moodleform {
         $mform->setDefault('exclusivity', 1);
 
         $exclgroup[] = $mform->createElement('advcheckbox', 'exclusivityenable', '', get_string('enable'));
-        $mform->setDefault('exclusivityenable', 1);
+        $mform->setDefault('exclusivityenable', 0);
         $mform->disabledIf('exclusivity', 'exclusivityenable', 'eq', 0);
 
         $mform->addGroup($exclgroup, 'exclusivitygroup', get_string('maxstudentsperslot', 'scheduler'), ' ', false);
