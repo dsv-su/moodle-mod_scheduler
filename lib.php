@@ -41,6 +41,11 @@ define('SCHEDULER_ALL', 2); // Used for setting conflict search scope.
 define ('SCHEDULER_MEAN_GRADE', 0); // Used for grading strategy.
 define ('SCHEDULER_MAX_GRADE', 1);  // Used for grading strategy.
 
+// Ugly hack to make 3.11 and 4.0 work seamlessly.
+if (!defined('FEATURE_MOD_PURPOSE')) {
+    define('FEATURE_MOD_PURPOSE', 'mod_purpose');
+}
+
 /**
  * Given an object containing all the necessary data,
  * will create a new instance and return the id number
